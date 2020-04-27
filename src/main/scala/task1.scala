@@ -1,33 +1,22 @@
 import scala.annotation.tailrec
 
 object task1 {
-
   def main(args: Array[String]): Unit = {
-    val value = args(0).toInt
-    println(combos(value))
-    println(combosRec(value))
+    val array = Array(1,2,3,4,5,6,7,8,9,20,25,23,24,29,34,28,1,2,3,4,5,6,47,5)
+    val result = array.indexOf(3)
+    println(result)
+    println(indexOFRec(3, array))
   }
 
-  def combos(sum: Int): List[String] = {
+  def indexOFRec(a: Int, array: Array[Int]): Int = {
     @tailrec
-    def find(a: Int, b: Int, list: List[String]): List[String] = {
-      if(a <= b){
-        find(a + 1, b - 1, list ::: List[String](a.toString + " + " + b.toString + " = " + sum.toString))
-      } else {
-        list
-      }
-    }
+    def find(a: Int, array: Array[Int], i: Int): Int = {
 
-    find(1, sum - 1, Nil)
-  }
-
-  def combosRec(sum: Int): List[String] = {
-    def find(a: Int, b: Int, list: List[String]): List[String] = {
-      if(a <= b) List(a.toString + " + " + b.toString
-        + " = " + sum.toString) ::: find(a + 1, b - 1, list)
-      else
-        Nil
+      if (i == array.length) 0
+      else if (array(i).equals(a)) {
+        i
+      } else find(a, array, i + 1)
     }
-    find(1, sum - 1, Nil)
+    find(a, array, 0)
   }
 }
